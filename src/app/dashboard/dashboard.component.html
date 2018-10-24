@@ -1,0 +1,43 @@
+<form (ngSubmit)="onFirstNameSearch()">
+  <span class="form-group">
+    <label for="firstName" style="color:coral;line-height: inherit;font-size:25px">First Name</label>
+    <input type="text" class="form-control" id="firstName" name="firstName" required [(ngModel)]="firstNameInput">
+
+  </span>
+  <span>
+    <button type="submit" class="btn btn-primary" style="margin-top:20px">Search First Name</button>
+  </span>
+
+</form>
+
+<form (ngSubmit)="onLastNameSearch()">
+  <span class="form-group">
+    <label for="lastName" style="color:coral;line-height: inherit;font-size:25px">Last Name</label>
+    <input type="text" class="form-control" id="lastName" name="lastName" required [(ngModel)]="lastNameInput">
+  </span>
+  <span>
+    <button type="submit" class="btn btn-primary" style="margin-top:20px">Search Last Name</button>
+  </span>
+</form>
+
+
+<div *ngIf="nameResult != null; then thenBlock"></div>
+
+<ng-template #thenBlock>
+  <div class="card" style="width: 18rem; margin-top:20px">
+    <div class="card-body">
+      <h5 class="card-title">
+        {{nameResult.display}}
+      </h5>
+
+
+      <div *ngIf="nameResult.showCreate">
+        <form (ngSubmit)="addName(nameResult.name, nameResult.type)">
+          <button type="submit" class="btn btn-info">
+            add {{nameResult.name}} to the database?
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
